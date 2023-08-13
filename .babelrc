@@ -1,0 +1,14 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "targets": "iOS 9, Android 4.4, last 2 versions, > 0.2%, not dead",
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ],
+    ["@babel/preset-typescript"],
+    ["@babel/preset-react"]
+  ]
+}

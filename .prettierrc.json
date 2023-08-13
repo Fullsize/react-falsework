@@ -1,0 +1,7 @@
+{
+  "singleQuote": true, 
+  "bracketSpacing": true, 
+  "htmlWhitespaceSensitivity": "ignore",  
+  "endOfLine": "auto", 
+  "tabWidth": 2 
+}
