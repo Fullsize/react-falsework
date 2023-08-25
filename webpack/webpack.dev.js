@@ -6,7 +6,7 @@ module.exports = merge(base, {
   devtool: 'inline-source-map',
   devServer: {
     // open: true, // 编译完自动打开浏览器
-    port: 8080,
+    port: 'auto',
     historyApiFallback: true,
     client: {
       overlay: false,
