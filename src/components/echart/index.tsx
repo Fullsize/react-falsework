@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useImperativeHandle } from 'react';
 import white from '@/theme/echart/white.json';
+import dark from '@/theme/echart/dark.json';
 import _ from 'lodash';
 
 import * as echarts from 'echarts';
@@ -19,6 +20,7 @@ const Echart = (props: Props, ref: React.Ref<unknown> | undefined) => {
     if (!echartRef.current) {
       return false;
     }
+    console.log(dark);
     // 注册主题
     echarts.registerTheme('echart_theme', white);
     // 监测是否有echart示例,没有实例就创建
