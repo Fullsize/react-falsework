@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useImperativeHandle } from 'react';
+import classNames from 'classnames';
 import white from '@/theme/echart/white.json';
 import dark from '@/theme/echart/dark.json';
 import _ from 'lodash';
-
+import styles from './index.module.css';
 import * as echarts from 'echarts';
 type OPTIONTYPE = echarts.EChartsOption | undefined;
 interface Props {
@@ -67,6 +68,12 @@ const Echart = (props: Props, ref: React.Ref<unknown> | undefined) => {
 
   // 对父组件暴露获取ECharts实例的方法，可直接通过实例调用原生函数
   useImperativeHandle(ref, () => ({ getInstance }));
-  return <div ref={echartRef} style={{ width: '100%', height: '100%' }}></div>;
+  return (
+    <div
+      ref={echartRef}
+      className={classNames(styles['echart_a131e131'], props.className)}
+      style={props.style}
+    ></div>
+  );
 };
 export default React.memo(React.forwardRef(Echart));
