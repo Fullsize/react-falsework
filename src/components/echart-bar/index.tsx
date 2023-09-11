@@ -128,17 +128,6 @@ const EchartBar = (props: Props) => {
         axisPointer: {
           type: 'shadow',
         },
-        formatter: function (params: any[] | null) {
-          let tip = '';
-          if (params !== null && params.length) {
-            params.map((item: any) => {
-              tip += `${item.marker}${item.seriesName}:  ${item.value[1]}${item.data?.unit}<br/>`;
-              return item;
-            });
-            return `${params[0].name}<br/>${tip}`;
-          }
-          return tip;
-        },
       },
       series,
     };

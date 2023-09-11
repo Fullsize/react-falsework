@@ -1,11 +1,23 @@
 import React from 'react';
 import EchartBar from '@/components/echart-bar';
+import * as ehcarts from 'echarts';
+import white from '@/theme/echart/white.json';
+import dark from '@/theme/echart/dark.json';
 import styles from './index.module.css';
 // import bg from "@images/1.png";
 import './index.css';
 const Page = () => {
+  const changeTheme = (type: string) => {
+    if (type === 'white') {
+      ehcarts.registerTheme('echart_theme', white);
+    } else {
+      ehcarts.registerTheme('echart_theme', dark);
+    }
+  };
   return (
     <div className={styles['constainer']}>
+      <button onClick={() => changeTheme('white')}>白色主题</button>
+      <button onClick={() => changeTheme('dark')}>黑色主题</button>
       <div style={{ width: 300, height: 180 }}>
         <EchartBar
           data={[
