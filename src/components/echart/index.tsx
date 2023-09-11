@@ -1,48 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useMeasure } from 'react-use';
+import React, { useEffect, useRef, useImperativeHandle } from 'react';
 import white from '@/theme/echart/white.json';
 import _ from 'lodash';
 
-import * as ehcart from 'echarts';
-type OPTIONTYPE = ehcart.EChartsOption | undefined;
+import * as echarts from 'echarts';
+type OPTIONTYPE = echarts.EChartsOption | undefined;
 interface Props {
   className?: string;
   style?: React.CSSProperties;
   option: OPTIONTYPE;
   getEchartObj?: (echart: any) => void;
 }
-const Echart = (props: Props) => {
-  const [constainerRef, { width: w, height: h }] = useMeasure<any>();
-  const [echartObj, setEchartObj] = useState<any>(null);
+const Echart = (props: Props, ref: React.Ref<unknown> | undefined) => {
   const echartRef = useRef(null);
-  const init = () => {
-    // 判断ref是否存在
-    if (!echartRef.current) {
-      return false;
-    }
-    // echart初始化
-    ehcart.registerTheme('echart_theme', white);
-    const chart = ehcart.init(echartRef.current, 'echart_theme');
-    props.getEchartObj?.(chart);
-    setEchartObj(chart);
-    return;
-  };
-  // 初始化 即父级宽高确认后再初始化
-  useEffect(() => {
-    init();
-  }, [w, h]);
-  // option 更新
-  useEffect(() => {
-    setOption(props.option);
-  }, [props.option, echartObj]);
-  const setOption = (option: OPTIONTYPE) => {
-    if (!echartObj) {
+  // 获取实例
+  const getInstance = () => echartRef.current;
+  const setOption = (chartObj: any) => {
+    if (!chartObj) {
       return;
     }
-
+    chartObj.resize();
     // option 为空
-    if (_.isEmpty(option)) {
-      echartObj.setOption({
+    if (_.isEmpty(props.option)) {
+      chartObj.setOption({
         title: {
           text: '暂无数据',
           x: 'center',
@@ -51,22 +30,31 @@ const Echart = (props: Props) => {
       });
       return;
     }
-    console.log('echart option', _.isEmpty(option), option);
-    echartObj.setOption(option, true);
+    console.log('echart option', _.isEmpty(props.option), props.option);
+    chartObj.setOption(props.option, true);
   };
-  return (
-    <div
-      className={props.className}
-      style={{
-        height: '100%',
-        width: '100%',
-        position: 'relative',
-        ...props.style,
-      }}
-      ref={constainerRef}
-    >
-      <div ref={echartRef} style={{ width: w, height: h }}></div>
-    </div>
-  );
+  const init = () => {
+    // 判断ref是否存在
+    if (!echartRef.current) {
+      return false;
+    }
+    // 注册主题
+    echarts.registerTheme('echart_theme', white);
+    // 监测是否有echart示例
+    let chart = echarts.getInstanceByDom(echartRef.current);
+    if (!chart) {
+      chart = echarts.init(echartRef.current, 'echart_theme');
+    }
+    props.getEchartObj?.(chart);
+    setOption(chart);
+    return;
+  };
+  // 监听echart容器和option变化
+  useEffect(() => {
+    init();
+  }, [echartRef, props.option]);
+  // 对父组件暴露获取ECharts实例的方法，可直接通过实例调用原生函数
+  useImperativeHandle(ref, () => ({ getInstance }));
+  return <div ref={echartRef} style={{ width: '100%', height: '100%' }}></div>;
 };
-export default Echart;
+export default React.memo(React.forwardRef(Echart));
