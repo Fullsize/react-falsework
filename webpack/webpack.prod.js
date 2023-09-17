@@ -1,3 +1,10 @@
+/*
+ * @Author: Fullsize
+ * @Date: 2023-08-13 09:46:45
+ * @LastEditors: Fullsize
+ * @LastEditTime: 2023-09-17 10:11:06
+ * @FilePath: /react-falsework/webpack/webpack.prod.js
+ */
 const { merge } = require('webpack-merge');
 const base = require('./webpack.base.js');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -51,7 +58,7 @@ module.exports = merge(base, {
       test: /\.(css|js)/i,
       algorithm: 'gzip',
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   output: {
     clean: true,
