@@ -8,7 +8,6 @@
     "dev": "cross-env NODE_OPTIONS=--max-old-space-size=1536 NODE_ENV=development webpack serve -c webpack/webpack.dev.js",
     "build": "cross-env NODE_OPTIONS=--max-old-space-size=1536 NODE_ENV=production webpack -c webpack/webpack.prod.js",
     "lint": "eslint --ext .tsx,.jsx,.js,.ts, src/ --fix",
-    "prepare": "husky install",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
