@@ -2,8 +2,8 @@
  # @Author: Fullsize
  # @Date: 2023-09-17 10:57:48
  # @LastEditors: Fullsize
- # @LastEditTime: 2023-09-17 11:45:02
- # @FilePath: /react-falsework/clear.sh
+ # @LastEditTime: 2023-09-18 22:32:26
+ # @FilePath: /react-falsework/docker.sh
 ### 
 docker stop nginx8080
 docker image prune
