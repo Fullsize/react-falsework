@@ -23,6 +23,7 @@
   "author": "Fullsize",
   "license": "ISC",
   "dependencies": {
+    "@svgr/webpack": "^8.1.0",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
     "core-js": "^3.31.0",
