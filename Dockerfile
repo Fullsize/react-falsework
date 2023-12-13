@@ -1,7 +1,8 @@
 FROM node:20-slim AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+# corepack需要梯子，暂时停止使用
+# RUN corepack enable
 # 镜像工作文件夹
 WORKDIR /app
 # 复制dockerfile 所在文件的文件至app
@@ -9,13 +10,15 @@ COPY . .
 
 # dev 依赖
 FROM base AS dev-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
+# RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --no-frozen-lockfile
+RUN npm i 
 
 # 打包
 FROM dev-deps AS builder
 WORKDIR /app
 COPY --from=dev-deps /app/node_modules/ /app/node_modules
-RUN pnpm run build
+# RUN pnpm run build
+RUN npm run build
 
 
 FROM nginx:alpine 
