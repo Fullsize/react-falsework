@@ -1,10 +1,4 @@
-/*
- * @Date: 2023-06-30 17:20:51
- * @LastEditors: Fullsize
- * @LastEditTime: 2023-08-09 14:34:04
- * @FilePath: /economy-mobile/src/components/route-component/index.tsx
- * @Author: Fullsize
- */
+/* @vite-ignore */
 import React, { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import routes from '@/routes';
@@ -26,7 +20,9 @@ const Page = () => {
         to?: string;
         children?: { path: string; component?: string; to?: string }[];
       }) => {
-        const Dashboard = lazy(() => import(`../../pages/${item.component}`));
+        const Dashboard = lazy(
+          () => import(`../../pages/${item.component}/index.tsx`),
+        );
         if (item.children) {
           return (
             <Route

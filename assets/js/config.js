@@ -5,5 +5,5 @@
  * @FilePath: /economy-mobile/assets/js/config.js
  * @Author: Fullsize
  */
-// api地址
-window.baseapi = '';
+// api 地址
+window.baseapi = '123';

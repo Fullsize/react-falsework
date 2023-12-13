@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-06-30 16:48:03
  * @LastEditors: Fullsize
- * @LastEditTime: 2023-06-30 17:09:41
- * @FilePath: /economy-mobile/postcss.config.js
+ * @LastEditTime: 2023-12-13 17:10:39
+ * @FilePath: /react-falsework/postcss.config.js
  * @Author: Fullsize
  */
 module.exports = {

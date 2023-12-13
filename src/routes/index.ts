@@ -7,7 +7,6 @@ export default [
   {
     path: '/a',
     name: '1',
-    to: '/',
     component: 'a',
   },
 ];
