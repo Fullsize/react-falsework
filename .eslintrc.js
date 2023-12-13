@@ -17,4 +17,5 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  ignorePatterns: ['assets', 'node_modules'],
 };

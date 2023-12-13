@@ -3,12 +3,16 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
+import ESLintPlugin from 'vite-plugin-eslint';
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
-  plugins: [react(), legacy()],
+  plugins: [react(), ESLintPlugin(), legacy()],
   base: './',
   server: {
     port: 3000,
+    hmr: {
+      overlay: false,
+    },
   },
   resolve: {
     alias: {
