@@ -1,8 +1,8 @@
 /*
  * @Date: 2023-06-30 17:20:51
  * @LastEditors: Fullsize
- * @LastEditTime: 2023-12-14 16:43:11
- * @FilePath: /xinjiang-16-9/src/components/route-component/index.tsx
+ * @LastEditTime: 2023-12-14 17:09:39
+ * @FilePath: /react-falsework/src/components/route-component/index.tsx
  * @Author: Fullsize
  */
 import React, { lazy, Suspense } from 'react';
@@ -12,7 +12,7 @@ const pages = import.meta.glob('../../pages/**/*.tsx');
 const lazyComponent = (components?: string) => {
   const a = `../../pages/${components}/index.tsx`;
   const b = `../../pages/${components}.tsx`;
-  let c = null;
+  let c: any = null;
   Object.entries(pages).map(([path, page]: any) => {
     if (path === a || path == b) {
       c = lazy(page);
