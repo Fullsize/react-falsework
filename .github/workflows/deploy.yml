@@ -25,9 +25,9 @@ jobs:
       - name: Run tests
         run: npm run lint
 
-      - name: Build and deploy to GitHub Pages
+      - name: deploy
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: build
+          FOLDER: dist
