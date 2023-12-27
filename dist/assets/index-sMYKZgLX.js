@@ -1,0 +1,1 @@
+import{j as e}from"./index-KRZ_3nCO.js";const n="_name_d5exj_1",a="_constainer_d5exj_6",s={name:n,constainer:a},c=()=>e.jsxs("div",{className:s.constainer,children:[e.jsx("div",{className:"name",children:"home"}),e.jsx("div",{className:s.name,children:"home"}),e.jsx("div",{})]});export{c as default};

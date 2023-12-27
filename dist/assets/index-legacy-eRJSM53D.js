@@ -1,0 +1,1 @@
+System.register(["./index-legacy-AXV-Uezc.js"],(function(e,n){"use strict";var t;return{setters:[function(e){t=e.j}],execute:function(){e("default",(function(){return t.jsxs("div",{children:[t.jsx("div",{children:"a"}),t.jsx("div",{children:"a"})]})}))}}}));
