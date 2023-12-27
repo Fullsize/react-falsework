@@ -3,6 +3,7 @@
     "target": "ESNext",
     "jsx": "preserve",
     "module": "ESNext",
+    "resolveJsonModule": true,
     "moduleResolution": "node",
     "rootDir": "./src",
     "baseUrl": ".",
