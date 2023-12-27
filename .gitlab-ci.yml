@@ -1,6 +1,6 @@
 # .gitlab-ci.yml
 
-image: node:16
+image: node:20-alpine
 
 stages:
   - test
@@ -9,16 +9,18 @@ stages:
 
 before_script:
   - npm config set registry https://registry.npmmirror.com/
-  - npm install
+  - npm install pnpm -g
+  - pnpm config set store-dir .pnpm-store
+  - pnpm i --no-frozen-lockfile
 
 cache:
   paths:
-    - node_modules/
+    - .pnpm-store
 
 build:
   stage: build
   script:
-    - npm run build
+    - pnpm run build
   artifacts:
     paths:
       - dist/
@@ -26,7 +28,7 @@ build:
 test:
   stage: test
   script:
-    - npm run lint
+    - pnpm run lint
 # deploy:
 #   stage: deploy
 #   script:
