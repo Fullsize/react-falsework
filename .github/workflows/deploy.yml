@@ -1,15 +1,14 @@
-name: Build and Deploy
+name: CI
 
 on:
   push:
-    branches:
-      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-     - name: Checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Node.js
@@ -23,9 +22,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Run tests
+        run: npm run lint
+
       - name: Build and deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dist # 这里填写你的构建输出文件夹名字，比如 dist、public 等
+          FOLDER: build
