@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './index.module.css';
 import { useNavigate } from 'react-router-dom';
 import Outlet from '@/pages/outlet';
-import WithAuth from '@/hocs/withAuth';
+// import WithAuth from '@/hocs/withAuth';
 // import bg from '@images/1.png';
 import './index.css';
 const Page = () => {

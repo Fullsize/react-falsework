@@ -7,9 +7,4 @@ export default [
     hoc: withAuth,
     children: [],
   },
-  {
-    path: 'abc',
-    name: '123',
-    component: 'a',
-  },
 ];
