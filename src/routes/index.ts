@@ -1,12 +1,15 @@
+import withAuth from '@/hocs/withAuth';
 export default [
   {
-    path: '/',
+    path: '',
     name: '首页',
     component: 'home',
+    hoc: withAuth,
+    children: [],
   },
   {
-    path: '/a',
-    name: '1',
+    path: 'abc',
+    name: '123',
     component: 'a',
   },
 ];
