@@ -1,41 +1,3 @@
-# react-falsework
-
-自建react脚手架，确保团队遵循统一的最佳实践和标准化，持续扩展
-
-## 项目启动
-
-```
-yarn dev or npm run dev
-```
-
-## 项目打包
-
-```
-yarn build or npm run build
-```
-
-## css module
-
-```
-*.module.css 为开启css module
-*.css 为正常模式
-```
-
-## git commit 提交规范
-
-```
-feat：新功能（feature）
-fix：修补bug
-docs：文档（documentation）
-style： 格式（不影响代码运行的变动）
-refactor：重构（即不是新增功能，也不是修改bug的代码变动）
-test：增加测试
-chore：构建过程或辅助工具的变动
-```
-
-## 项目结构
-
-```
 react-falsework
 ├─.dockerignore
 ├─.eslintignore
@@ -101,4 +63,3 @@ react-falsework
 |   ├─pre-commit
 |   ├─_
 |   | └husky.sh
-```

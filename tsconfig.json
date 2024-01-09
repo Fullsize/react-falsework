@@ -9,7 +9,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@images/*": ["assets/images/*"]
+      "@images/*": ["public/images/*"]
     },
     "strict": true,
     "sourceMap": true,
@@ -23,5 +23,5 @@
     "noEmit": true,
     "skipLibCheck": true
   },
-  "include": ["src", "types", "assets"]
+  "include": ["src", "types", "public"]
 }

@@ -34,7 +34,8 @@ const renderRoute = (list?: ROUTEITEM[]) => {
           <Dashboard />
         </Suspense>
       );
-      return item.hoc ? item.hoc(content)() : content;
+      return content;
+      // return item.hoc ? item.hoc(content)() : content;
     };
     return (
       <Route key={item.path} path={item.path} element={<Replacement />}>
