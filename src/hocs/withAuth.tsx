@@ -4,10 +4,11 @@ import { userToken } from '@/utils/user';
 import { Navigate } from 'react-router-dom';
 const WithAuth = (Component: any) => () => {
   const isLogin = userToken.get();
-  if (isLogin) {
-    return <Component />;
-  } else {
-    return <Navigate to="/login" />;
-  }
+  // if (isLogin) {
+  //   return <Component />;
+  // } else {
+  //   return <Navigate to="/login" />;
+  // }
+  return <Component />;
 };
 export default WithAuth;
