@@ -6,6 +6,11 @@ module.exports = {
     'plugin:react/jsx-runtime',
     // "airbnb"
   ],
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   root: true,
