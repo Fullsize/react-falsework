@@ -1,8 +1,8 @@
 # 设置文件名大小写敏感
 * case-sensitive=true
 # 文件结尾
-*.js    eol=lf
-*.ts    eol=lf
-*.jsx   eol=lf
-*.tsx   eol=lf
-*.json  eol=lf
+*.js   text  eol=lf
+*.ts   text  eol=lf
+*.jsx  text  eol=lf
+*.tsx  text  eol=lf
+*.json text  eol=lf
