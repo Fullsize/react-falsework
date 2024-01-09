@@ -5,7 +5,6 @@ ENV PATH="$PNPM_HOME:$PATH"
 # RUN corepack enable
 RUN npm config set registry https://registry.npmmirror.com
 RUN npm i pnpm -g
-# 镜像工作文件夹
 WORKDIR /app
 # 复制dockerfile 所在文件的文件至app
 COPY . .
@@ -24,5 +23,9 @@ FROM nginx:alpine
 RUN rm -rf /usr/share/nginx/html/*
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+VOLUME /usr/share/nginx/html
+
 EXPOSE 80
+
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
