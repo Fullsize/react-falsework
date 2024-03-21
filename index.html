@@ -16,5 +16,10 @@
   <body>
     <div id="app"></div>
     <script type="module" src="./src/index.tsx"></script>
+    <script>
+      window.addEventListener('vite:preloadError', (event) => {
+        window.location.reload(); // 例如，刷新页面
+      });
+    </script>
   </body>
 </html>

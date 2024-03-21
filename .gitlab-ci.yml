@@ -13,17 +13,17 @@ before_script:
   - pnpm config set store-dir .pnpm-store
   - pnpm i --no-frozen-lockfile
 
-cache:
-  paths:
-    - .pnpm-store
+# cache:
+#   paths:
+#     - .pnpm-store
 
 build:
   stage: build
   script:
     - pnpm run build
-  artifacts:
-    paths:
-      - dist/
+  # artifacts:
+  #   paths:
+  #     - dist/
 
 test:
   stage: test
