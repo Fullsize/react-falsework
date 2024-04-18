@@ -11,7 +11,6 @@ const Page = () => {
   useEffect(() => {
     console.log(accurate(5.01, 2));
   }, []);
-  const a;
   return (
     <div className={styles['constainer']}>
       <div className="name">home</div>
