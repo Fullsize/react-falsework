@@ -8,7 +8,7 @@ import ESLintPlugin from 'vite-plugin-eslint';
 export default defineConfig({
   plugins: [react(), ESLintPlugin(), legacy()],
   base: './',
-  publicDir: false,
+  // publicDir: true,
   server: {
     port: 3000,
     hmr: {
@@ -18,7 +18,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'), // 设置 @ 别名为 src 目录的绝对路径
-      '@images': path.resolve(__dirname, 'assets/images'),
+
     },
   }
 });
