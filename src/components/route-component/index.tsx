@@ -1,27 +1,30 @@
 import React, { lazy, Suspense, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import routes from '@/routes';
+import routes, { ROUTEITEM } from '@/routes';
 const pages = import.meta.glob('../../pages/**/*.tsx');
-type HOC = (component: React.ComponentType<any>) => React.ComponentType<any>;
-type ROUTEITEM = {
-  path: string;
-  component?: string;
-  to?: string;
-  hoc?: HOC[];
-  children?: ROUTEITEM[];
-};
+
 import _ from 'lodash-es';
 const lazyComponent = (components?: string) => {
+  // / 增强参数校验：确保 components 是一个字符串且不为空
+  if (typeof components !== 'string' || components.trim() === '') {
+    throw new Error('Invalid component path.');
+  }
+  // 使用模板字符串并转义路径参数，防止路径注入
+  const escapePath = (path: string) => path.replace(/\//g, '');
   const possiblePaths = [
-    `../../pages/${components}/index.tsx`,
-    `../../pages/${components}.tsx`,
+    `../../pages/${escapePath(components)}/index.tsx`,
+    `../../pages/${escapePath(components)}.tsx`,
   ];
-  const foundPath = Object.keys(pages).find((path) =>
-    possiblePaths.includes(path),
+  // 使用 find 方法找到匹配的路径
+  const foundPath = possiblePaths.find((path) =>
+    Object.keys(pages).includes(path),
   );
-  return foundPath ? lazy(pages[foundPath]) : null;
+  // 异常处理改进：当没有找到路径时抛出异常，而不是返回 null
+  if (!foundPath) {
+    throw new Error(`Component path not found: ${components}`);
+  }
+  return lazy(pages[foundPath]);
 };
-
 const renderRoute = (list?: ROUTEITEM[]) => {
   const data = list ?? routes;
   return data.map((item: ROUTEITEM) => {
