@@ -4,7 +4,7 @@ export default [
     path: '',
     name: '首页',
     component: 'home',
-    hoc: withAuth,
+    hoc: [withAuth],
     children: [],
   },
 ];

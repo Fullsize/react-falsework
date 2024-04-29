@@ -1,4 +1,4 @@
-import { floor } from 'lodash';
+import { floor } from 'lodash-es';
 import qs from 'qs';
 import Decimal from 'decimal.js';
 /**

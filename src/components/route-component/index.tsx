@@ -25,7 +25,10 @@ const lazyComponent = (components?: string) => {
 const renderRoute = (list?: ROUTEITEM[]) => {
   const data = list ?? routes;
   return data.map((item: ROUTEITEM) => {
-    const Dashboard: any = lazyComponent(item.component);
+    let Dashboard: any = lazyComponent(item.component);
+    Dashboard = item.hoc
+      ? item.hoc.reduce((acc: any, hoc: any) => hoc(acc), Dashboard)
+      : Dashboard;
     const Replacement = () => {
       const content = item.to ? (
         <Navigate to={item.to} />
@@ -35,7 +38,6 @@ const renderRoute = (list?: ROUTEITEM[]) => {
         </Suspense>
       );
       return content;
-      // return item.hoc ? item.hoc(content)() : content;
     };
     return (
       <Route key={item.path} path={item.path} element={<Replacement />}>
