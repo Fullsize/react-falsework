@@ -4,6 +4,7 @@ import { userToken } from '@/utils/user';
 import { Navigate } from 'react-router-dom';
 const WithAuth = (Component: any) => () => {
   const isLogin = userToken.get();
+  console.log(7);
   // if (isLogin) {
   //   return <Component />;
   // } else {

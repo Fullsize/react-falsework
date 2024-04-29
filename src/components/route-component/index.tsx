@@ -1,16 +1,16 @@
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useMemo } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import routes from '@/routes';
 const pages = import.meta.glob('../../pages/**/*.tsx');
-
+type HOC = (component: React.ComponentType<any>) => React.ComponentType<any>;
 type ROUTEITEM = {
   path: string;
   component?: string;
   to?: string;
-  hoc?: any;
+  hoc?: HOC[];
   children?: ROUTEITEM[];
 };
-
+import _ from 'lodash-es';
 const lazyComponent = (components?: string) => {
   const possiblePaths = [
     `../../pages/${components}/index.tsx`,
@@ -25,16 +25,23 @@ const lazyComponent = (components?: string) => {
 const renderRoute = (list?: ROUTEITEM[]) => {
   const data = list ?? routes;
   return data.map((item: ROUTEITEM) => {
-    let Dashboard: any = lazyComponent(item.component);
-    Dashboard = item.hoc
-      ? item.hoc.reduce((acc: any, hoc: any) => hoc(acc), Dashboard)
-      : Dashboard;
+    const Dashboard: any = useMemo(
+      () => lazyComponent(item.component),
+      [item.component],
+    );
+    const EnhancedDashboard = useMemo(
+      () =>
+        item.hoc
+          ? item.hoc.reduce((acc: any, hoc: any) => hoc(acc), Dashboard)
+          : Dashboard,
+      [Dashboard, item.hoc],
+    );
     const Replacement = () => {
       const content = item.to ? (
         <Navigate to={item.to} />
       ) : (
         <Suspense fallback={<div>...</div>}>
-          <Dashboard />
+          <EnhancedDashboard />
         </Suspense>
       );
       return content;
