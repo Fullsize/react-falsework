@@ -1,9 +1,6 @@
 FROM node:20-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-# 增加git
-RUN apk --no-cache add git
-RUN git -v
 # corepack需要梯子，暂时停止使用
 # RUN corepack enable
 RUN npm config set registry https://registry.npmmirror.com
