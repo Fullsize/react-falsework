@@ -16,6 +16,11 @@
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": [
       "prettier --write",
+      "eslint --ext .tsx,.jsx,.js,.ts, src/ --fix",
+      "git add"
+    ],
+    "*.{css,scss,sass,less}": [
+      "prettier --write",
       "git add"
     ]
   },
