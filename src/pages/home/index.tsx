@@ -10,6 +10,10 @@ const Page = () => {
   useEffect(() => {
     console.log(accurate(5.01, 2));
   }, []);
-  return <div className={styles['constainer']}></div>;
+  return (
+    <div className={styles['constainer']}>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    </div>
+  );
 };
 export default Page;
