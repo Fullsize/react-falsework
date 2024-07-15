@@ -9,6 +9,7 @@ const Page = () => {
     autosize.init({
       el: '#app',
     });
+    autosize.off();
   }, []);
   return (
     <div className={styles['main']}>

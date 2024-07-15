@@ -9,6 +9,8 @@ interface Options {
 interface Autosize {
   el: HTMLElement | null;
   init: (options?: Options) => void;
+  resizeKeepFit: () => void;
+  off: () => void;
 }
 function keepFit(dw: number, dh: number, dom: HTMLElement) {
   const clientHeight = document.documentElement.clientHeight;
@@ -21,6 +23,10 @@ function keepFit(dw: number, dh: number, dom: HTMLElement) {
   dom.style.width = `${width}px`;
   dom.style.transform = `scale(${currScale})`;
 }
+
+let currentElement: HTMLElement | null = null;
+let currentWidth = 0;
+let currentHeight = 0;
 const autosize: Autosize = {
   el: null,
   init(options = {}) {
@@ -30,24 +36,36 @@ const autosize: Autosize = {
       el = 'body',
       resize = true,
     } = options as Options;
-    this.el = typeof el === 'string' ? document.querySelector(el) : el;
+    currentElement = typeof el === 'string' ? document.querySelector(el) : el;
+    currentWidth = width;
+    currentHeight = height;
     const bodyEl = document.querySelector<HTMLElement>('body');
     if (bodyEl) {
       bodyEl.style.overflow = 'hidden';
     }
-    if (this.el) {
-      this.el.style.height = `${height}px`;
-      this.el.style.width = `${width}px`;
-      this.el.style.transformOrigin = `0 0`;
-      this.el.style.overflow = 'hidden';
+    if (currentElement) {
+      currentElement.style.height = `${height}px`;
+      currentElement.style.width = `${width}px`;
+      currentElement.style.transformOrigin = `0 0`;
+      currentElement.style.overflow = 'hidden';
 
-      keepFit(width, height, this.el);
-      resize &&
-        window.addEventListener('resize', () => {
-          if (this.el) {
-            keepFit(width, height, this.el);
-          }
-        });
+      keepFit(currentWidth, currentHeight, currentElement);
+      resize && window.addEventListener('resize', this.resizeKeepFit);
+    }
+  },
+  resizeKeepFit() {
+    if (currentElement) {
+      keepFit(currentWidth, currentHeight, currentElement);
+    }
+  },
+  off() {
+    if (currentElement) {
+      currentElement.style.height = ``;
+      currentElement.style.width = ``;
+      currentElement.style.transformOrigin = ``;
+      currentElement.style.overflow = '';
+      currentElement.style.transform = '';
+      window.removeEventListener('resize', this.resizeKeepFit);
     }
   },
 };
