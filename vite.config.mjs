@@ -4,9 +4,10 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import legacy from '@vitejs/plugin-legacy';
 import ESLintPlugin from 'vite-plugin-eslint';
+import image from '@rollup/plugin-image'
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
-  plugins: [react(), ESLintPlugin(), legacy()],
+  plugins: [react(), ESLintPlugin(), image(), legacy(),],
   base: './',
   // publicDir: true,
   server: {
