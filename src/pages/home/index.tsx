@@ -1,21 +1,34 @@
-import React, { useEffect } from 'react';
-import styles from './index.module.css';
-import { useNavigate } from 'react-router-dom';
-import { accurate } from '@/utils';
-// import WithAuth from '@/hocs/withAuth';
-import bg from '@/images/1.png';
+import React, { useEffect, useContext } from 'react';
+import ThemeContext from '@/theme';
+import Echarts from '@/components/echarts';
 import './index.css';
 const Page = () => {
-  const navigate = useNavigate();
-  useEffect(() => {
-    console.log(accurate(5.01, 2));
-  }, []);
+  const { setTheme } = useContext(ThemeContext);
   return (
-    <div
-      className={styles['constainer']}
-      style={{ backgroundImage: `url(${bg})` }}
-    >
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    <div className="w-full h-full">
+      <h1 style={{ margin: 0 }}>文字</h1>
+      <div>
+        <button onClick={() => setTheme('light')}>白色主题</button>
+        <button onClick={() => setTheme('dark')}>黑色主题</button>
+      </div>
+      <Echarts
+        style={{ width: 500, height: 400 }}
+        options={{
+          xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          },
+          yAxis: {
+            type: 'value',
+          },
+          series: [
+            {
+              data: [150, 230, 224, 218, 135, 147, 260],
+              type: 'line',
+            },
+          ],
+        }}
+      />
     </div>
   );
 };

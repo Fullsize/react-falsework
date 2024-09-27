@@ -27,8 +27,8 @@ dependencies:
     specifier: ^5.4.2
     version: 5.4.2
   fl-hooks:
-    specifier: ^1.2.0
-    version: 1.2.0(axios@1.4.0)(echarts@5.4.2)(react@18.2.0)
+    specifier: latest
+    version: 1.4.0(axios@1.4.0)(echarts@5.4.2)(react@18.2.0)
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
@@ -5909,8 +5909,8 @@ packages:
       path-exists: 4.0.0
     dev: true
 
-  /fl-hooks@1.2.0(axios@1.4.0)(echarts@5.4.2)(react@18.2.0):
-    resolution: {integrity: sha512-+0KXkdFRyTL2L778snoF1mJbmHmlt4pDP+pY0tJAveWXZeBaMYQvsNgg/Pc6T/Hv8x/5I5yEI9rKJ194LVlWaA==}
+  /fl-hooks@1.4.0(axios@1.4.0)(echarts@5.4.2)(react@18.2.0):
+    resolution: {integrity: sha512-TnONxvL14FgejwGXUlJ7tyjbxGo54w4PzDPTFnCPEQ9+wDx8OWOnLfJxVBn9rd0j+Itm5Z7fiEaUmVEPZZ5LjQ==}
     peerDependencies:
       axios: '*'
       echarts: '*'

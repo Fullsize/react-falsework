@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import Layout from '@/components/layout';
 import './normalize.css';
 import './index.css';
+import './theme/css/index.css';
 const root = createRoot(document.getElementById('app')!);
 function render() {
   root.render(
