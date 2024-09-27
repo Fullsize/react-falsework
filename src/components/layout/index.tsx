@@ -4,7 +4,8 @@ import Routes from '@/components/route-component';
 import styles from './index.module.css';
 import autosize from '@/utils/autosize';
 import classNames from 'classnames';
-import ThemeContext, { defaultTheme } from '@/theme';
+import ThemeContext, { defaultTheme, AntdTheme } from '@/theme';
+import { ConfigProvider } from 'antd';
 const Page = () => {
   const [theme, setTheme] = useState(defaultTheme);
   useEffect(() => {
@@ -15,9 +16,11 @@ const Page = () => {
   }, []);
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={classNames(styles['main'], theme)}>
-        <Routes />
-      </div>
+      <ConfigProvider theme={AntdTheme[theme]}>
+        <div className={classNames(styles['main'], theme)}>
+          <Routes />
+        </div>
+      </ConfigProvider>
     </ThemeContext.Provider>
   );
 };
