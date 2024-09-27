@@ -8,7 +8,7 @@ const ThemeContext = createContext<any>(null);
 //导出
 export default ThemeContext;
 // echarts 主题
-export const EchartTheme: any = {
+export const EchartTheme = {
   light: EWhite,
   dark: EDark,
 };

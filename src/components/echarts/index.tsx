@@ -7,13 +7,14 @@ interface Props {
   options?: echarts.EChartsOption;
 }
 const Echarts = (props: Props) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useContext<{ theme: 'light' | 'dark' }>(ThemeContext);
   const [element, ref] = useState<any>(null);
   const [chatRef, setchatRef] = useState<echarts.ECharts | null>(null);
 
   useEffect(() => {
     if (element) {
-      echarts.registerTheme(theme, EchartTheme[theme]);
+      const obj = EchartTheme[theme];
+      echarts.registerTheme(theme, obj);
       const chat = echarts.init(element, theme);
       setchatRef(chat);
       chat.setOption(props.options ?? {});

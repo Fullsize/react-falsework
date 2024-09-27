@@ -9,6 +9,7 @@ const Page = () => {
       <div>
         <button onClick={() => setTheme('light')}>白色主题</button>
         <button onClick={() => setTheme('dark')}>黑色主题</button>
+        <button onClick={() => setTheme('wwww')}>无主题</button>
       </div>
       <h1 style={{ margin: 0 }}>文字</h1>
 
