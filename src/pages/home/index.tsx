@@ -6,11 +6,12 @@ const Page = () => {
   const { setTheme } = useContext(ThemeContext);
   return (
     <div className="w-full h-full">
-      <h1 style={{ margin: 0 }}>文字</h1>
       <div>
         <button onClick={() => setTheme('light')}>白色主题</button>
         <button onClick={() => setTheme('dark')}>黑色主题</button>
       </div>
+      <h1 style={{ margin: 0 }}>文字</h1>
+
       <Echarts
         style={{ width: 500, height: 400 }}
         options={{
