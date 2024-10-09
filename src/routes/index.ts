@@ -1,4 +1,5 @@
 import withAuth from '@/hocs/withAuth';
+import WithHome from '@/hocs/withHome';
 type HOC = (component: React.ComponentType<any>) => React.ComponentType<any>;
 export type ROUTEITEM = {
   path: string; // 路径
@@ -14,6 +15,20 @@ export default [
     name: '首页',
     component: 'home',
     hoc: [withAuth],
+    children: [],
+  },
+  {
+    path: 'theme',
+    name: '主题',
+    component: 'theme',
+    hoc: [WithHome],
+    children: [],
+  },
+  {
+    path: 'image',
+    name: '主题',
+    component: 'image',
+    hoc: [WithHome],
     children: [],
   },
 ] as ROUTEITEM[];
