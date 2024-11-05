@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 const pages = [
   { name: '静态资源', path: '/image' },
   { name: '主题', path: '/theme' },
+  { name: '可视化', path: '/chart' },
   // 你可以继续添加其他页面
 ];
 

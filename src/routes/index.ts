@@ -26,8 +26,15 @@ export default [
   },
   {
     path: 'image',
-    name: '主题',
+    name: '静态资源',
     component: 'image',
+    hoc: [WithHome],
+    children: [],
+  },
+  {
+    path: 'chart',
+    name: '可视化',
+    component: 'chart',
     hoc: [WithHome],
     children: [],
   },
