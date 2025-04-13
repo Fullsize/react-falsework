@@ -35,37 +35,110 @@ const autosize: Autosize = {
       height = 1080,
       el = 'body',
       resize = true,
+      minWidth = 0,
+      minHeight = 0,
     } = options as Options;
+
+    // 验证输入参数
+    if (width <= 0 || height <= 0) {
+      throw new Error('Width and height must be positive numbers');
+    }
+
+    // 使用ResizeObserver替代resize事件,性能更好
+    const resizeObserver = new ResizeObserver(() => {
+      this.resizeKeepFit();
+    });
+
+    // 获取目标元素
     currentElement = typeof el === 'string' ? document.querySelector(el) : el;
-    currentWidth = width;
-    currentHeight = height;
+    if (!currentElement) {
+      throw new Error('Target element not found');
+    }
+
+    currentWidth = Math.max(width, minWidth);
+    currentHeight = Math.max(height, minHeight);
+
+    // 使用 CSS 变量存储关键值，方便样式复用和维护
+    document.documentElement.style.setProperty(
+      '--target-width',
+      `${currentWidth}px`,
+    );
+    document.documentElement.style.setProperty(
+      '--target-height',
+      `${currentHeight}px`,
+    );
+
+    // 设置 body 样式
     const bodyEl = document.querySelector<HTMLElement>('body');
     if (bodyEl) {
       bodyEl.style.overflow = 'hidden';
     }
-    if (currentElement) {
-      currentElement.style.height = `${height}px`;
-      currentElement.style.width = `${width}px`;
-      currentElement.style.transformOrigin = `0 0`;
-      currentElement.style.overflow = 'hidden';
 
-      keepFit(currentWidth, currentHeight, currentElement);
-      resize && window.addEventListener('resize', this.resizeKeepFit);
+    // 使用 CSS transform 实现缩放，性能更好
+    const styles = {
+      height: 'var(--target-height)',
+      width: 'var(--target-width)',
+      transformOrigin: '0 0',
+      overflow: 'hidden',
+      position: 'absolute',
+      left: '50%',
+      top: '50%',
+      willChange: 'transform', // 优化渲染性能
+    };
+    Object.assign(currentElement.style, styles);
+
+    // 初始化自适应
+    this.resizeKeepFit();
+
+    // 添加 ResizeObserver 监听
+    if (resize) {
+      resizeObserver.observe(document.documentElement);
+      // 保存 observer 实例以便后续清理
+      (this as any).resizeObserver = resizeObserver;
     }
   },
+
   resizeKeepFit() {
-    if (currentElement) {
-      keepFit(currentWidth, currentHeight, currentElement);
-    }
+    if (!currentElement) return;
+
+    const { clientHeight, clientWidth } = document.documentElement;
+    const ratio = Math.min(
+      clientWidth / currentWidth,
+      clientHeight / currentHeight,
+    );
+
+    // 使用 transform: translate 优化定位性能
+    currentElement.style.transform = `
+      translate(-50%, -50%) 
+      scale(${ratio})
+    `;
   },
+
   off() {
-    if (currentElement) {
-      currentElement.style.height = ``;
-      currentElement.style.width = ``;
-      currentElement.style.transformOrigin = ``;
-      currentElement.style.overflow = '';
-      currentElement.style.transform = '';
-      window.removeEventListener('resize', this.resizeKeepFit);
+    if (!currentElement) return;
+
+    // 清理 CSS 变量
+    document.documentElement.style.removeProperty('--target-width');
+    document.documentElement.style.removeProperty('--target-height');
+
+    // 重置所有样式
+    const styles = {
+      height: '',
+      width: '',
+      transformOrigin: '',
+      overflow: '',
+      transform: '',
+      position: '',
+      left: '',
+      top: '',
+      willChange: '',
+    };
+    Object.assign(currentElement.style, styles);
+
+    // 清理 ResizeObserver
+    if ((this as any).resizeObserver) {
+      (this as any).resizeObserver.disconnect();
+      (this as any).resizeObserver = null;
     }
   },
 };
